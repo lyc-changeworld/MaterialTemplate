@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--右边主界面部分布局-->
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/view_toolbar"
+                     android:id="@+id/toolbar"/>
+        </android.support.design.widget.AppBarLayout>
+        <!--其它部分为内容显示部分(可以更换填充的布局)-->
+        <FrameLayout
+            android:id="@+id/fl_main_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <!--为内容显示区域添加滚动行为检测,接收者是appbar-->
+        </FrameLayout>
+    </android.support.design.widget.CoordinatorLayout>
+    <!--layout_gravity这个属性必须指定,指定left表示滑动菜单在左边,right表示右边
+      start表示根据系统语言展开的方向进行判断(例如：英语是从左往右的,故在左边)-->
+    <!--app:menu表示菜单栏布局文件-->
+    <!--app:headerLayout表示顶部栏布局文件-->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/menu_drawer_nav"
+        app:headerLayout="@layout/view_nav_header"/>
+</android.support.v4.widget.DrawerLayout>
