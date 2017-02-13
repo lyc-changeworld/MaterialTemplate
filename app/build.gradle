@@ -46,4 +46,5 @@ dependencies {
     compile 'com.miguelcatalan:materialsearchview:1.4.0'
     //汉字转拼音
     compile files('libs/pinyin4j-2.5.0.jar')
+
 }

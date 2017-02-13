@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--功能:包裹在module0中的单个tab对应的界面fragment-->
-<RelativeLayout
+<!--功能:包裹在module1中的单个tab对应的界面fragment-->
+<android.support.v4.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
+    <!--添加列表控件-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ry_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="fragment_1_0"
-        android:gravity="center"
-        android:layout_centerInParent="true"/>
-
-</RelativeLayout>
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+</android.support.v4.widget.SwipeRefreshLayout>

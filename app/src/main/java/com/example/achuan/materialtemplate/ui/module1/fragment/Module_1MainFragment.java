@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.example.achuan.materialtemplate.BaseVfAdapter;
 import com.example.achuan.materialtemplate.R;
 import com.example.achuan.materialtemplate.base.SimpleFragment;
+import com.example.achuan.materialtemplate.ui.module0.fragment.Item_0Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +21,16 @@ import butterknife.ButterKnife;
 
 /**
  * Created by achuan on 17-2-1.
+ * 功能：该界面是使用了ViewPager和Fragment联动的效果,使用了TabLayout,
+ *      在这里添加了四个子Fragment到主Fragment中实现滑动切换界面显示
  */
 
 public class Module_1MainFragment extends SimpleFragment {
 
-    //顶部导航标签文字
-    //String[] tabTitle = new String[]{, "", "", ""};
+
     //定义一个fragment集合实例来存储对应要滑动显示的多个fragment实例
     List<Fragment> fragments;
+    //顶部导航标签文字
     List<String> titles;
 
     //FragmentPagerAdapter引用变量
@@ -55,9 +58,9 @@ public class Module_1MainFragment extends SimpleFragment {
         titles.add(getString(R.string.tab_vf_title_2));
         titles.add(getString(R.string.tab_vf_title_3));
         fragments.add(new Tab_0Fragment());
+        fragments.add(new Item_0Fragment());
         fragments.add(new Tab_0Fragment());
-        fragments.add(new Tab_0Fragment());
-        fragments.add(new Tab_0Fragment());
+        fragments.add(new Item_0Fragment());
         //实例化适配器
         mBaseVfAdapter=new BaseVfAdapter(getChildFragmentManager(),fragments,titles);
         //为viewpager添加适配器

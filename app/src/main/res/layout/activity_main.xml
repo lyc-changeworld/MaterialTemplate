@@ -21,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-            <!--为内容显示区域添加滚动行为检测,接收者是appbar-->
+            <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            为内容显示区域添加滚动行为检测,接收者是appbar-->
         </FrameLayout>
     </android.support.design.widget.CoordinatorLayout>
     <!--layout_gravity这个属性必须指定,指定left表示滑动菜单在左边,right表示右边

@@ -18,6 +18,9 @@ import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * Created by achuan on 17-2-1.
+ * 功能：使用官方的BottomNavigation控件实现了主Fragment中子Fragment的切换显示
+ *  &&&当前的问题:当设置列表向上滑动时让Toolbar上移隐藏,此时BottomNav也上移,真正--
+ *   合理的效果应该是列表上滑时Toolbar上移隐藏的同时BottomNav下移消失,反之亦然
  */
 
 public class Module_0MainFragment extends SimpleFragment implements BottomNavigationView.OnNavigationItemSelectedListener {

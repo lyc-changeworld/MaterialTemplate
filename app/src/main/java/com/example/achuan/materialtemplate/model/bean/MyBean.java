@@ -7,13 +7,27 @@ package com.example.achuan.materialtemplate.model.bean;
 
 public class MyBean {
 
-    private String name;
+    private String Title;
+    private String Content;
 
-    public String getName() {
-        return name;
+    public MyBean(String title, String content) {
+        Title = title;
+        Content = content;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getContent() {
+        return Content;
+    }
+
+    public void setContent(String content) {
+        Content = content;
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
     }
 }

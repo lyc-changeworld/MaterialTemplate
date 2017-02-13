@@ -119,7 +119,7 @@ public class SystemUtil {
                     }
                     @Override
                     public void onLeftButtonClick() {
-                        TastyToastUtil.info_long(
+                        TastyToastUtil.info_short(
                                 context,
                                 "你差点就去了火星");
                     }
