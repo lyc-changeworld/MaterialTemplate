@@ -9,13 +9,14 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 
 /**
  * Created by achuan on 17-2-7.
- * 参考资料：http://blog.csdn.net/yanzhenjie1003/article/details/51935982
+ * 参考资料：普通版：http://blog.csdn.net/yanzhenjie1003/article/details/51935982
+ *         高级版：http://blog.csdn.net/yanzhenjie1003/article/details/52115566
  * 功能：实现item拖拽和侧滑效果,使用了接口回调机制
  */
 
 public class RyItemTouchHelperCallback extends ItemTouchHelper.Callback{
 
-    private float ALPHA_FULL = 1.0f;
+    private float ALPHA_FULL = 1.0f;//透明度的满格值
     private boolean isCanDrag = false;//是否可以拖拽
     private boolean isCanSwipe = false;//是否可以被滑动
 

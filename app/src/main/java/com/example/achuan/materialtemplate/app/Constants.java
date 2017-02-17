@@ -10,6 +10,9 @@ public class Constants {
     public static final int TYPE_MODULE_0=100;
     public static final int TYPE_MODULE_1=200;
     public static final int TYPE_MODULE_2=300;
+    /*MAIN TYPE CODE*/
+    public static final int TYPE_SETTINGS=001;
+
     /*MODULE_0 ITEM TYPE CODE*/
     public static final int TYPE_ITEM_0=101;
     public static final int TYPE_ITEM_1=102;

@@ -1,17 +1,16 @@
 package com.example.achuan.materialtemplate.ui.module1.fragment;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.achuan.materialtemplate.BaseVfAdapter;
+import com.example.achuan.materialtemplate.BaseVf_V13Adapter;
 import com.example.achuan.materialtemplate.R;
 import com.example.achuan.materialtemplate.base.SimpleFragment;
-import com.example.achuan.materialtemplate.ui.module0.fragment.Item_0Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,7 @@ public class Module_1MainFragment extends SimpleFragment {
     List<String> titles;
 
     //FragmentPagerAdapter引用变量
-    BaseVfAdapter mBaseVfAdapter;
+    BaseVf_V13Adapter mBaseVfAdapter;
 
 
     @BindView(R.id.tab_module1_main)
@@ -58,11 +57,11 @@ public class Module_1MainFragment extends SimpleFragment {
         titles.add(getString(R.string.tab_vf_title_2));
         titles.add(getString(R.string.tab_vf_title_3));
         fragments.add(new Tab_0Fragment());
-        fragments.add(new Item_0Fragment());
         fragments.add(new Tab_0Fragment());
-        fragments.add(new Item_0Fragment());
+        fragments.add(new Tab_0Fragment());
+        fragments.add(new Tab_0Fragment());
         //实例化适配器
-        mBaseVfAdapter=new BaseVfAdapter(getChildFragmentManager(),fragments,titles);
+        mBaseVfAdapter=new BaseVf_V13Adapter(getFragmentManager(),fragments,titles);
         //为viewpager添加适配器
         mVpModule1Main.setAdapter(mBaseVfAdapter);
         //将TabLayout和ViewPager关联起来

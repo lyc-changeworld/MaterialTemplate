@@ -99,7 +99,7 @@ public class SystemUtil {
                         public void onLeftButtonClick() {
                             TastyToastUtil.warning_long(
                                     context,
-                                    "不联网部分功能将无法体验");
+                                    "不联网部分功能将无法体验! ! !");
                         }
                     });
         }

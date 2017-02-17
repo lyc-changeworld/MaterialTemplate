@@ -1,5 +1,6 @@
 package com.example.achuan.materialtemplate;
 
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,14 +12,17 @@ import java.util.List;
 /**
  * Created by achuan on 16-11-10.
  * 功能：ViewPager和Fragment顶部导航界面滑动显示的适配器类
+ * 注意事项：这里使用的是v4包下的Adapter,如果在不使用PreferenceFragment的情况下,可以使用该类,
+ *   反之就建议使用v13包下的Adatper,否则就会出现Fragment不一致的情况,不太好处理
  */
-public class BaseVfAdapter extends FragmentPagerAdapter {
+public class BaseVf_V4Adapter extends FragmentPagerAdapter {
 
     //fragment集合的引用变量,用来指向构造方法中引入的fragment集合实例
     private List<Fragment> fragments;
     private List<String> titles;
 
-    public BaseVfAdapter(FragmentManager fm, List<Fragment> fragments,List<String> titles) {
+
+    public BaseVf_V4Adapter(FragmentManager fm, List<Fragment> fragments, List<String> titles) {
         super(fm);
         this.fragments=fragments;
         this.titles=titles;

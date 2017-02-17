@@ -27,6 +27,7 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     /*ui*/
+    compile 'com.android.support:support-v13:25.1.0'
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:design:25.1.0'
     compile 'com.android.support:recyclerview-v7:25.1.0'
@@ -40,8 +41,6 @@ dependencies {
     //圆形进度条
     compile 'com.victor:lib:1.0.4'
     /*other*/
-    //fragment控制
-    compile 'me.yokeyword:fragmentation:0.7.12'
     //搜索控件
     compile 'com.miguelcatalan:materialsearchview:1.4.0'
     //汉字转拼音

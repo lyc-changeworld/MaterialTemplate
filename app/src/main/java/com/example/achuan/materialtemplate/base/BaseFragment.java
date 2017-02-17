@@ -1,5 +1,7 @@
 package com.example.achuan.materialtemplate.base;
 
+
+import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,13 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
-import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * Created by codeest on 2016/8/2.
  * 功能：MVP Fragment基类
+ * 注意：SupportFragment使用的是support.v4.app.Fragment,因为在ViewPager和Fragment的联动适配器中,
+ *     只能使用supportV4包中的Fragment,因此单独建了该基类,本想只在联动布局中使用,但发现其父布局也应该使
+ *     用该包,因此该项目中全都使用了
+ *
  */
-public abstract class BaseFragment<T extends BasePresenter> extends SupportFragment implements BaseView{
+public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements BaseView{
 
 
     protected T mPresenter;
@@ -50,7 +55,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
             }
         }
     }
-    //碎片隐藏状态改变时调用该方法(用来确保非隐藏状态时完成初始化)
+    //碎片隐藏状态改变时调用该方法(碎片与用户交互时进行初始化数据操作)
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
@@ -66,6 +71,33 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
         if(mPresenter!=null){
             mPresenter.detachView();//取消关联(presenter和fragment)
         }
+    }
+
+    /***---动态添加碎片到位置区域---
+     * 用replace的效果就是：切换fragment时每次都会重新创建初始化。
+     * ***/
+    public void replaceFragment(int viewId, Fragment fragment) {
+        //在Fragment中获取FragmentManager时,就用下面的方法,否则用getSupportFragmentManager()
+        //getChildFragmentManager().beginTransaction().replace(viewId,fragment).commit();
+        //getSupportFragmentManager().beginTransaction().replace(viewId,fragment).commit();
+        //对于android.app.Fragment使用下面的方法,否则用上面的两种方法
+        getFragmentManager().beginTransaction()//开启事务
+                .replace(viewId,fragment)//kill之前的碎片,并初始化加载当前碎片
+                .commit();//提交事务
+    }
+
+    /***---添加碎片到内容区域中---***/
+    public void addFragment(int viewId, Fragment fragment){
+        getFragmentManager().beginTransaction()//开启事务
+                .add(viewId,fragment)//添加
+                .commit();//提交事务
+    }
+    /***隐藏之前的以及显示当前的item对应的Fragment***/
+    public void showFragment( Fragment hideFragment,Fragment showFragment){
+        getFragmentManager().beginTransaction()//开启事务
+                .hide(hideFragment)//隐藏
+                .show(showFragment)//显示
+                .commit();//提交事务
     }
 
     protected abstract T createPresenter();//创建操作者实例

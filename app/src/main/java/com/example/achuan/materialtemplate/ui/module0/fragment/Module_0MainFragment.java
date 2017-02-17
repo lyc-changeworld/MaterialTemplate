@@ -1,5 +1,7 @@
 package com.example.achuan.materialtemplate.ui.module0.fragment;
 
+
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -14,7 +16,6 @@ import com.example.achuan.materialtemplate.base.SimpleFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * Created by achuan on 17-2-1.
@@ -40,26 +41,25 @@ public class Module_0MainFragment extends SimpleFragment implements BottomNaviga
     @BindView(R.id.bottom_nav)
     BottomNavigationView mBottomNav;
 
+    int contentViewId;//内容显示区域的控件的id号,后面用来添加碎片使用
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_0;
     }
     @Override
     protected void initEventAndData() {
+        contentViewId=R.id.fl_moudle0_content;
         /***1-初始化底部导航栏设置***/
         //初始化第一次显示的item为设置界面
         mLastMenuItem=mBottomNav.getMenu().findItem(R.id.bottom_nav_0);
         mLastMenuItem.setChecked(true);
         //添加点击监听事件
         mBottomNav.setOnNavigationItemSelectedListener(this);
-        /***2-初始化创建各模块的fragment实例对象,并装载到主布局中****/
-        mItem_0Fragment=new Item_0Fragment();
-        mItem_1Fragment=new Item_1Fragment();
-        mItem_2Fragment=new Item_2Fragment();
-        //越靠前添加的fragment越在上面显示
-        loadMultipleRootFragment(R.id.fl_moudle0_content, 0,//容器id和目标位置
-                mItem_0Fragment, mItem_1Fragment,
-                mItem_2Fragment);//添加进去的fragment实例对象
+        /***2-初始化创建模块的fragment实例对象,并装载到主布局中****/
+        mItem_0Fragment=new Item_0Fragment();//默认先创建第一界面
+        //并将第一界面碎片添加到布局容器中
+        replaceFragment(R.id.fl_moudle0_content,getTargetFragment(showFragment));
     }
 
     @Override
@@ -67,19 +67,32 @@ public class Module_0MainFragment extends SimpleFragment implements BottomNaviga
         switch (item.getItemId()){
             case R.id.bottom_nav_0:
                 showFragment=Constants.TYPE_ITEM_0;
+                //第一次加载显示时,才创建碎片对象,并添加到内容容器中
+                if(mItem_0Fragment==null){
+                    mItem_0Fragment=new Item_0Fragment();
+                    addFragment(contentViewId,mItem_0Fragment);
+                }
                 break;
             case R.id.bottom_nav_1:
                 showFragment=Constants.TYPE_ITEM_1;
+                if(mItem_1Fragment==null){
+                    mItem_1Fragment=new Item_1Fragment();
+                    addFragment(contentViewId,mItem_1Fragment);
+                }
                 break;
             case R.id.bottom_nav_2:
                 showFragment=Constants.TYPE_ITEM_2;
+                if(mItem_2Fragment==null){
+                    mItem_2Fragment=new Item_2Fragment();
+                    addFragment(contentViewId,mItem_2Fragment);
+                }
                 break;
             default:break;
         }
         /***点击item后进行显示切换处理,并记录在本地中***/
         if (mLastMenuItem!=null&&mLastMenuItem!= item) {
             //实现fragment的切换显示
-            showHideFragment(getTargetFragment(showFragment), getTargetFragment(hideFragment));
+            showFragment(getTargetFragment(hideFragment),getTargetFragment(showFragment));
             //选择过的item变成了历史
             mLastMenuItem = item;
             //当前fragment显示完就成为历史了
@@ -89,7 +102,7 @@ public class Module_0MainFragment extends SimpleFragment implements BottomNaviga
     }
 
     //根据item编号获取fragment对象的方法
-    private SupportFragment getTargetFragment(int item) {
+    private Fragment getTargetFragment(int item) {
         switch (item) {
             case Constants.TYPE_ITEM_0:
                 return mItem_0Fragment;

@@ -1,5 +1,7 @@
 package com.example.achuan.materialtemplate.ui.main.activity;
 
+
+import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 import com.example.achuan.materialtemplate.R;
 import com.example.achuan.materialtemplate.app.Constants;
 import com.example.achuan.materialtemplate.base.SimpleActivity;
+import com.example.achuan.materialtemplate.ui.main.fragment.SettingsFragment;
 import com.example.achuan.materialtemplate.ui.module0.fragment.Module_0MainFragment;
 import com.example.achuan.materialtemplate.ui.module1.fragment.Module_1MainFragment;
 import com.example.achuan.materialtemplate.ui.module2.fragment.Module_2MainFragment;
@@ -20,7 +23,6 @@ import com.example.achuan.materialtemplate.util.SystemUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.yokeyword.fragmentation.SupportFragment;
 
 public class MainActivity extends SimpleActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -30,7 +32,7 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
     Module_0MainFragment mModuleFragment_0;
     Module_1MainFragment mModuleFragment_1;
     Module_2MainFragment mModuleFragment_2;
-
+    SettingsFragment mSettingsFragment;
 
     //定义变量记录需要隐藏和显示的fragment的编号
     private int hideFragment = Constants.TYPE_MODULE_0;
@@ -38,6 +40,8 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
 
     //记录左侧navigation的item点击
     MenuItem mLastMenuItem;//历史
+
+    int contentViewId;//内容显示区域的控件的id号,后面用来添加碎片使用
 
 
     @BindView(R.id.toolbar)
@@ -54,16 +58,13 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
     }
     @Override
     protected void initEventAndData() {
+        contentViewId=R.id.fl_main_content;
         /********************检测并打开网络****************/
         SystemUtil.checkAndShowNetSettingDialog(this);
-        /***1-初始化创建各模块的fragment实例对象,并装载到主activity中****/
+        /***1-初始化创建模块的fragment实例对象,并装载到主activity中****/
         mModuleFragment_0=new Module_0MainFragment();
-        mModuleFragment_1=new Module_1MainFragment();
-        mModuleFragment_2=new Module_2MainFragment();
-        //越靠前添加的fragment越在上面显示
-        loadMultipleRootFragment(R.id.fl_main_content, 0,//容器id和目标位置
-                mModuleFragment_0, mModuleFragment_1,
-                mModuleFragment_2);//添加进去的fragment实例对象
+        //***初始化显示第一个Fragment,用replace方法***
+        replaceFragment(R.id.fl_main_content,mModuleFragment_0);
         /***2-navigation中item的初始化设置***/
         //初始化第一次显示的item为设置界面
         mLastMenuItem = mNavView.getMenu().findItem(R.id.drawer_nav_fun_0);
@@ -100,7 +101,7 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
 
     //重写back按钮的点击事件
     @Override
-    public void onBackPressedSupport() {
+    public void onBackPressed() {
         SystemUtil.showExitDialog(this);
     }
 
@@ -126,12 +127,32 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
             //针对不同的item实现不同的逻辑处理
             case R.id.drawer_nav_fun_0:
                 showFragment = Constants.TYPE_MODULE_0;
+                if(mModuleFragment_0==null){
+                    mModuleFragment_0=new Module_0MainFragment();
+                    //第一次创建Fragment时将碎片添加到内容布局中
+                    addFragment(contentViewId,mModuleFragment_0);
+                }
                 break;
             case R.id.drawer_nav_fun_1:
                 showFragment = Constants.TYPE_MODULE_1;
+                if(mModuleFragment_1==null){
+                    mModuleFragment_1=new Module_1MainFragment();
+                    addFragment(contentViewId,mModuleFragment_1);
+                }
                 break;
             case R.id.drawer_nav_fun_2:
                 showFragment = Constants.TYPE_MODULE_2;
+                if(mModuleFragment_2==null){
+                    mModuleFragment_2=new Module_2MainFragment();
+                    addFragment(contentViewId,mModuleFragment_2);
+                }
+                break;
+            case R.id.drawer_nav_opt_2:
+                showFragment=Constants.TYPE_SETTINGS;
+                if(mSettingsFragment==null){
+                    mSettingsFragment=new SettingsFragment();
+                    addFragment(contentViewId,mSettingsFragment);
+                }
                 break;
             default:break;
         }
@@ -142,8 +163,8 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
             mToolbar.setTitle(item.getTitle());//改变标题栏的内容
             //记录当前显示的item
             SharedPreferenceUtil.setCurrentItem(showFragment);
-            //实现fragment的切换显示
-            showHideFragment(getTargetFragment(showFragment), getTargetFragment(hideFragment));
+            //***实现fragment的切换显示***
+            showFragment(getTargetFragment(hideFragment),getTargetFragment(showFragment));
             //选择过的item变成了历史
             mLastMenuItem = item;
             //当前fragment显示完就成为历史了
@@ -155,7 +176,7 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
     }
 
     //根据item编号获取fragment对象的方法
-    private SupportFragment getTargetFragment(int item) {
+    private Fragment getTargetFragment(int item) {
         switch (item) {
             case Constants.TYPE_MODULE_0:
                 return mModuleFragment_0;
@@ -163,6 +184,8 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
                 return mModuleFragment_1;
             case Constants.TYPE_MODULE_2:
                 return mModuleFragment_2;
+            case Constants.TYPE_SETTINGS:
+                return mSettingsFragment;
             default:break;
         }
         return mModuleFragment_0;

@@ -14,7 +14,7 @@
     <string name="drawer_nav_group_options">选项</string>
     <string name="drawer_nav_title_3">3</string>
     <string name="drawer_nav_title_4">4</string>
-    <string name="drawer_nav_title_5">5</string>
+    <string name="drawer_nav_title_5">设置</string>
 
     <!--3-BottomNavMenu中的菜单项的标题-->
     <string name="bottom_nav_title_0">0</string>

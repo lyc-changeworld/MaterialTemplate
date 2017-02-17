@@ -7,7 +7,7 @@ import com.example.achuan.materialtemplate.base.SimpleFragment;
  * Created by achuan on 17-2-4.
  */
 
-public class Item_1Fragment extends SimpleFragment{
+public class Item_1Fragment extends SimpleFragment {
 
 
     @Override

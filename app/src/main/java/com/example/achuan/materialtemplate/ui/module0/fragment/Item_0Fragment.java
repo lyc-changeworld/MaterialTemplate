@@ -10,9 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.achuan.materialtemplate.RyItemTouchHelperCallback;
 import com.example.achuan.materialtemplate.R;
 import com.example.achuan.materialtemplate.RyItemDivider;
+import com.example.achuan.materialtemplate.RyItemTouchHelperCallback;
 import com.example.achuan.materialtemplate.base.SimpleFragment;
 import com.example.achuan.materialtemplate.model.bean.MyBean;
 import com.example.achuan.materialtemplate.ui.module0.adapter.Module0_RyAdapter;

@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
  * Created by achuan on 17-2-4.
  */
 
-public class Tab_0Fragment extends SimpleFragment{
+public class Tab_0Fragment extends SimpleFragment {
 
 
     @BindView(R.id.ry_view)

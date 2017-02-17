@@ -1,22 +1,24 @@
 package com.example.achuan.materialtemplate.base;
 
+import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
+
 import com.example.achuan.materialtemplate.app.App;
 
 import butterknife.ButterKnife;
-import me.yokeyword.fragmentation.SupportActivity;
 
 /**
  * Created by achuan on 16-10-29.
  * 功能：无MVP的activity基类
  */
-public abstract class SimpleActivity extends SupportActivity{
+public abstract class SimpleActivity extends AppCompatActivity {
 
 
     @Override
@@ -67,10 +69,38 @@ public abstract class SimpleActivity extends SupportActivity{
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressedSupport();
+                onBackPressed();
             }
         });
     }
+
+    /***---动态添加碎片到位置区域---
+     * 用replace的效果就是：切换fragment时每次都会重新创建初始化。
+     * ***/
+    public void replaceFragment(int viewId, Fragment fragment) {
+        //在Fragment中获取FragmentManager时,就用下面的方法,否则用getSupportFragmentManager()
+        //getChildFragmentManager().beginTransaction().replace(viewId,fragment).commit();
+        //getSupportFragmentManager().beginTransaction().replace(viewId,fragment).commit();
+        //对于android.app.Fragment使用下面的方法,否则用上面的两种方法
+        getFragmentManager().beginTransaction()//开启事务
+                .replace(viewId,fragment)//kill之前的碎片,并初始化加载当前碎片
+                .commit();//提交事务
+    }
+
+    /***---添加碎片到内容区域中---***/
+    public void addFragment(int viewId, Fragment fragment){
+        getFragmentManager().beginTransaction()//开启事务
+                .add(viewId,fragment)//添加
+                .commit();//提交事务
+    }
+    /***隐藏之前的以及显示当前的item对应的Fragment***/
+    public void showFragment( Fragment hideFragment,Fragment showFragment){
+        getFragmentManager().beginTransaction()//开启事务
+                .hide(hideFragment)//隐藏
+                .show(showFragment)//显示
+                .commit();//提交事务
+    }
+
 
     //设置接口方法,具体功能让子类来实现
     protected abstract int getLayout();
