@@ -3,30 +3,38 @@
     android:layout="@layout/preference_item"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="设置">
+    <!--android:key 对于要保留数据值的首选项,必须拥有此属性.
+    它指定系统在将此设置的值保存在 SharedPreferences 中时所用的唯一键（字符串）-->
+
     <PreferenceCategory
         android:layout="@layout/preference_category_widget"
-        android:title="人性化自由选择">
-
+        android:title="通用">
         <CheckBoxPreference
-            android:layout="@layout/preference_item"
-            android:title="贝壳通知栏单词处于最高位置"
-            android:key="注意"
-            android:summaryOn="当前为最高位置"
-            android:summaryOff="当前为最低位置(默认)"
+            android:key="save_net_mode"
+            android:title="省流量模式"
+            android:summary="仅在Wi-Fi环境下才自动加载图片"
             android:defaultValue="false"/>
+        <SwitchPreference
+            android:key="light_mode"
+            android:title="夜间模式"
+            android:defaultValue="false">
+        </SwitchPreference>
         <Preference
+            android:key="clear_cache"
             android:layout="@layout/preference_item"
-            android:title="在通知栏显示音标"
-            android:summary="当前为不显示"
-            android:defaultValue="false"/>
+            android:title="清空缓存"
+            android:summary="删除已缓存的文章内容及图片"/>
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:layout="@layout/preference_category_widget"
-        android:title="感谢有你">
+        android:title="其它说明">
+        <Preference
+            android:title="检查更新"
+            android:summary="当前版本号 V1.0">
+        </Preference>
         <Preference
             android:layout="@layout/preference_item"
-            android:summary="我的博客：http://drakeet.me"
-            android:title="作者：drakeet"/>
+            android:title="阿川的GitHub地址"
+            android:summary="https://github.com/lyc-changeworld"/>
     </PreferenceCategory>
 </PreferenceScreen>

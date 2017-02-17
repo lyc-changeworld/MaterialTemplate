@@ -60,6 +60,7 @@ public class Module_0MainFragment extends SimpleFragment implements BottomNaviga
         mItem_0Fragment=new Item_0Fragment();//默认先创建第一界面
         //并将第一界面碎片添加到布局容器中
         replaceFragment(R.id.fl_moudle0_content,getTargetFragment(showFragment));
+
     }
 
     @Override

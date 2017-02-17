@@ -20,6 +20,8 @@ public class Constants {
 
 
     //=================SHARED_PREFERENCE VALUE_NAME====================
+    //创建的SharedPreferences文件的文件名
+    public static final String PREFERENCES_NAME = "my_sp";
     public static final String SP_CURRENT_ITEM = "current_item";
 
 }
