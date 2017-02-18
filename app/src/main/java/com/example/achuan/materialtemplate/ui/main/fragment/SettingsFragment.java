@@ -17,6 +17,8 @@ import com.example.achuan.materialtemplate.util.SharedPreferenceUtil;
  * Created by achuan on 17-2-15.
  * 功能：实现个人喜好设置的界面功能
  * 参考官网链接：https://developer.android.com/guide/topics/ui/settings.html
+ * 其它参考链接：http://mypyg.iteye.com/blog/839501
+ *     ---关于夜间模式的使用后续在需要的情况下再添加进来---
  */
 
 public  class SettingsFragment extends PreferenceFragment {
@@ -39,16 +41,17 @@ public  class SettingsFragment extends PreferenceFragment {
 
         /*1-通过管理者根据key值获取对应的UI控件*/
         mCheckBoxPreference= (CheckBoxPreference) mPreferenceManager
-                .findPreference("save_net_mode");//这里传入xml文件中定义的key值获取控件对象
+                .findPreference(getString(R.string.preference_key_0));
+        //这里传入xml文件中定义的key值获取控件对象
         mSwitchPreference= (SwitchPreference) mPreferenceManager
-                .findPreference("light_mode");
-        mClearCache=mPreferenceManager.findPreference("clear_cache");
+                .findPreference(getString(R.string.preference_key_1));
+        mClearCache=mPreferenceManager.findPreference(getString(R.string.preference_key_2));
 
         //2-初始化UI控件的状态
         mCheckBoxPreference.setChecked(SharedPreferenceUtil.getAppSp().
-                getBoolean("save_net_mode",false));
+                getBoolean(getString(R.string.preference_key_0),false));
         mSwitchPreference.setChecked(SharedPreferenceUtil.getAppSp()
-                .getBoolean("light_mode",false));
+                .getBoolean(getString(R.string.preference_key_1),false));
 
 
         /*3-为纯文本的设置栏添加点击监听*/
@@ -68,12 +71,11 @@ public  class SettingsFragment extends PreferenceFragment {
                     @Override
                     public void onSharedPreferenceChanged(
                             SharedPreferences sharedPreferences, String key) {
-                        if(key.equals("save_net_mode")){
+                        if(key.equals(getString(R.string.preference_key_0))){
                             Toast.makeText(getActivity(),
                                     "CheckBox状态为"+sharedPreferences.getBoolean(key,false),
                                     Toast.LENGTH_SHORT).show();
-
-                        }else if(key.equals("light_mode")){
+                        }else if(key.equals(getString(R.string.preference_key_1))){
                             Toast.makeText(getActivity(),
                                     "Switch状态为"+sharedPreferences.getBoolean(key,false),
                                     Toast.LENGTH_SHORT).show();
