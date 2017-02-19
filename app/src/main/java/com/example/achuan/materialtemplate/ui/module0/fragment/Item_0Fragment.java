@@ -1,6 +1,7 @@
 package com.example.achuan.materialtemplate.ui.module0.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.achuan.materialtemplate.BaseDetailActivity;
 import com.example.achuan.materialtemplate.R;
 import com.example.achuan.materialtemplate.RyItemDivider;
 import com.example.achuan.materialtemplate.RyItemTouchHelperCallback;
@@ -98,6 +100,22 @@ public class Item_0Fragment extends SimpleFragment {
         ryItemTouchHelperCallback.setSwipeEnable(true);//设置是否可以滑动
         //将回复对象交给总触碰对象,并绑定事件到控件中
         new ItemTouchHelper(ryItemTouchHelperCallback).attachToRecyclerView(mRyView);
+
+        /*添加item的点击事件监听*/
+        mAdatper.setOnItemClickListener(new Module0_RyAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int postion) {
+                Intent intent=new Intent(mContent, BaseDetailActivity.class);
+                /*传递消息*/
+                intent.putExtra(BaseDetailActivity.TITLE_NAME,
+                        mList.get(postion).getTitle());//传递点击item的标题
+                mContent.startActivity(intent);//开始跳转activity
+            }
+            @Override
+            public void onItemLongClick(View view, int postion) {
+
+            }
+        });
     }
 
     //模拟刷新数据显示

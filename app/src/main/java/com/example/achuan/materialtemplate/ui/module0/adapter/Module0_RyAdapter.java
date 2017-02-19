@@ -32,7 +32,8 @@ public class Module0_RyAdapter extends RecyclerView.Adapter<Module0_RyAdapter.Vi
 
     //define interface
     public interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view);
+        void onItemClick(View view,int postion);
+        void onItemLongClick(View view,int postion);
     }
 
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
@@ -86,8 +87,18 @@ public class Module0_RyAdapter extends RecyclerView.Adapter<Module0_RyAdapter.Vi
             public void onClick(View view) {
                 if (mOnItemClickListener != null) {
                     //设置回调监听
-                    mOnItemClickListener.onItemClick(view);
+                    mOnItemClickListener.onItemClick(view,postion);
                 }
+            }
+        });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(mOnItemClickListener!=null){
+                    //设置长时间点击回调监听
+                    mOnItemClickListener.onItemLongClick(v,postion);
+                }
+                return false;//设置成false,这样就不会触发单击的监听事件
             }
         });
     }

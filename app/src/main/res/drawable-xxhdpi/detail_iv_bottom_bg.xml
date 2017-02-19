@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--功能：实现一个渐变的颜色效果-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--android:angle="xx"90代表由下往上,180代表由右往左(以此类推)-->
+    <gradient
+        android:angle="90"
+        android:endColor="@android:color/transparent"
+        android:startColor="@color/toolbar"/>
+</shape>

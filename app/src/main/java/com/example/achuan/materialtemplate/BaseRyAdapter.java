@@ -32,8 +32,8 @@ public abstract class BaseRyAdapter extends RecyclerView.Adapter<BaseRyAdapter.V
 
     //define interface
     public  interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view);
-        void onItemLongClick(View view);
+        void onItemClick(View view,int postion);
+        void onItemLongClick(View view,int postion);
     }
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
         this.mOnItemClickListener = listener;
@@ -85,7 +85,7 @@ public abstract class BaseRyAdapter extends RecyclerView.Adapter<BaseRyAdapter.V
             public void onClick(View view) {
                 if(mOnItemClickListener!=null){
                     //设置单击回调监听
-                    mOnItemClickListener.onItemClick(view);
+                    mOnItemClickListener.onItemClick(view,postion);
                 }
             }
         });
@@ -94,7 +94,7 @@ public abstract class BaseRyAdapter extends RecyclerView.Adapter<BaseRyAdapter.V
             public boolean onLongClick(View v) {
                 if(mOnItemClickListener!=null){
                     //设置长时间点击回调监听
-                    mOnItemClickListener.onItemLongClick(v);
+                    mOnItemClickListener.onItemLongClick(v,postion);
                 }
                 return false;//设置成false,这样就不会触发单击的监听事件
             }

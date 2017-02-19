@@ -21,6 +21,7 @@
 
         <!--***************注册activity*****************-->
         <!--主activity-->
+        <activity android:name=".BaseDetailActivity"></activity>
         <activity android:name=".ui.main.activity.MainActivity">
             <intent-filter >
                 <action android:name="android.intent.action.MAIN"></action>
