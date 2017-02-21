@@ -12,7 +12,8 @@ import android.view.View;
  * 功能：为RecycleView绘制自定义的分割线
  * 方法说明：onDraw方法：其绘制将会在每个Item被绘制之前进行；
            onDrawOver：在绘制完Item后进行绘制；
-          getItemOffsets 可以通过outRect.set()为每个Item设置一定的偏移量；
+          getItemOffsets：可以通过outRect.set()为每个Item设置一定的偏移量；
+   注明：该类的具体使用见：ui/module0/fragment/Itme0Fragment文件
  */
 
 public class RyItemDivider extends RecyclerView.ItemDecoration {
@@ -40,7 +41,6 @@ public class RyItemDivider extends RecyclerView.ItemDecoration {
         //计算分割线最左边和最右边的位置
         final int left = parent.getPaddingLeft();
         final int right = parent.getWidth() - parent.getPaddingRight();
-
         //计算item的个数
         final int childCount = parent.getChildCount();
         //遍历将每个item的分割线画出来

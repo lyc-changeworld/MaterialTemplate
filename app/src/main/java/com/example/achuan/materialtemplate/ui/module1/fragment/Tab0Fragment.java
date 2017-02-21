@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.example.achuan.materialtemplate.R;
 import com.example.achuan.materialtemplate.base.SimpleFragment;
 import com.example.achuan.materialtemplate.model.bean.MyBean;
-import com.example.achuan.materialtemplate.ui.module1.adapter.Module1_RyAdapter;
+import com.example.achuan.materialtemplate.ui.module1.adapter.Tab0Adapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,40 +24,40 @@ import butterknife.ButterKnife;
  * Created by achuan on 17-2-4.
  */
 
-public class Tab_0Fragment extends SimpleFragment {
+public class Tab0Fragment extends SimpleFragment {
 
-
-    @BindView(R.id.ry_view)
-    RecyclerView mRyView;
-    @BindView(R.id.swipe_refresh)
-    SwipeRefreshLayout mSwipeRefresh;
 
     Context mContent;
     List<MyBean> mList;
-    Module1_RyAdapter mAdatper;
+    Tab0Adapter mAdatper;
+
+    @BindView(R.id.rv)
+    RecyclerView mRv;
+    @BindView(R.id.sw_rf)
+    SwipeRefreshLayout mSwRf;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_1_tab0;
+        return R.layout.fragment_moudle1_tab0;
     }
 
     @Override
     protected void initEventAndData() {
-        mContent=getActivity();
+        mContent = getActivity();
         initData();
-        mAdatper=new Module1_RyAdapter(mContent,mList);
-        LinearLayoutManager linearlayoutManager=new LinearLayoutManager(mContent);
+        mAdatper = new Tab0Adapter(mContent, mList);
+        LinearLayoutManager linearlayoutManager = new LinearLayoutManager(mContent);
         //设置方向(默认是垂直,下面的是水平设置)
         //linearlayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        mRyView.setLayoutManager(linearlayoutManager);//为列表添加布局
-        mRyView.setAdapter(mAdatper);//为列表添加适配器
-        //mRyView.addItemDecoration(new RyItemDivider(mContent,R.drawable.item_divider));//添加分割线
+        mRv.setLayoutManager(linearlayoutManager);//为列表添加布局
+        mRv.setAdapter(mAdatper);//为列表添加适配器
+        //mRv.addItemDecoration(new RyItemDivider(mContent,R.drawable.di_item));//添加分割线
     }
 
     private void initData() {
-        mList=new ArrayList<MyBean>();
-        for (int i = 0; i <20 ; i++) {
-            mList.add(new MyBean("这里是标题"+i,"这里是内容区域"));
+        mList = new ArrayList<MyBean>();
+        for (int i = 0; i < 20; i++) {
+            mList.add(new MyBean("这里是标题" + i, "这里是内容区域"));
         }
     }
 

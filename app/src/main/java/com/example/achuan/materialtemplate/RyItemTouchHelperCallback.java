@@ -12,6 +12,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
  * 参考资料：普通版：http://blog.csdn.net/yanzhenjie1003/article/details/51935982
  *         高级版：http://blog.csdn.net/yanzhenjie1003/article/details/52115566
  * 功能：实现item拖拽和侧滑效果,使用了接口回调机制
+ * 注明：具体的使用见： ui/module0/fragment/Itme0Fragment文件
  */
 
 public class RyItemTouchHelperCallback extends ItemTouchHelper.Callback{

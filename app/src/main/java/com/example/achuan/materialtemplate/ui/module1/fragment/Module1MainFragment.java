@@ -21,10 +21,10 @@ import butterknife.ButterKnife;
 /**
  * Created by achuan on 17-2-1.
  * 功能：该界面是使用了ViewPager和Fragment联动的效果,使用了TabLayout,
- *      在这里添加了四个子Fragment到主Fragment中实现滑动切换界面显示
+ * 在这里添加了四个子Fragment到主Fragment中实现滑动切换界面显示
  */
 
-public class Module_1MainFragment extends SimpleFragment {
+public class Module1MainFragment extends SimpleFragment {
 
 
     //定义一个fragment集合实例来存储对应要滑动显示的多个fragment实例
@@ -35,43 +35,43 @@ public class Module_1MainFragment extends SimpleFragment {
     //FragmentPagerAdapter引用变量
     BaseVf_V13Adapter mBaseVfAdapter;
 
+    @BindView(R.id.tab_module1)
+    TabLayout mTabModule1;
+    @BindView(R.id.vp_module1)
+    ViewPager mVpModule1;
 
-    @BindView(R.id.tab_module1_main)
-    TabLayout mTabModule1Main;
-    @BindView(R.id.vp_module1_main)
-    ViewPager mVpModule1Main;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_1;
+        return R.layout.fragment_moudle1_main;
     }
 
     @Override
     protected void initEventAndData() {
         //创建集合体实例
         fragments = new ArrayList<Fragment>();
-        titles=new ArrayList<String>();
+        titles = new ArrayList<String>();
         /***装载fragment实例和tab的标签到集合体中***/
         titles.add(getString(R.string.tab_vf_title_0));
         titles.add(getString(R.string.tab_vf_title_1));
         titles.add(getString(R.string.tab_vf_title_2));
         titles.add(getString(R.string.tab_vf_title_3));
-        fragments.add(new Tab_0Fragment());
-        fragments.add(new Tab_0Fragment());
-        fragments.add(new Tab_0Fragment());
-        fragments.add(new Tab_0Fragment());
+        fragments.add(new Tab0Fragment());
+        fragments.add(new Tab0Fragment());
+        fragments.add(new Tab0Fragment());
+        fragments.add(new Tab0Fragment());
         //实例化适配器
-        mBaseVfAdapter=new BaseVf_V13Adapter(getFragmentManager(),fragments,titles);
+        mBaseVfAdapter = new BaseVf_V13Adapter(getFragmentManager(), fragments, titles);
         //为viewpager添加适配器
-        mVpModule1Main.setAdapter(mBaseVfAdapter);
+        mVpModule1.setAdapter(mBaseVfAdapter);
         //将TabLayout和ViewPager关联起来
-        mTabModule1Main.setupWithViewPager(mVpModule1Main);
+        mTabModule1.setupWithViewPager(mVpModule1);
         //当使用很多tab时,使用滑动模式
-        //mTabModule1Main.setTabMode(TabLayout.MODE_SCROLLABLE);
+        //mTabModule1.setTabMode(TabLayout.MODE_SCROLLABLE);
         //tab均分,适合少的tab
-        //mTabModule1Main.setTabMode(TabLayout.MODE_FIXED);
+        //mTabModule1.setTabMode(TabLayout.MODE_FIXED);
         //tab均分,适合少的tab,TabLayout.GRAVITY_CENTER
-        //mTabModule1Main.setTabGravity(TabLayout.GRAVITY_FILL);//充满,仅适用于MODE_FIXED模式
+        //mTabModule1.setTabGravity(TabLayout.GRAVITY_FILL);//充满,仅适用于MODE_FIXED模式
     }
 
     @Override

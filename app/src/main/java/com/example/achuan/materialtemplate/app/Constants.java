@@ -24,4 +24,7 @@ public class Constants {
     public static final String PREFERENCES_NAME = "my_sp";
     public static final String SP_CURRENT_ITEM = "current_item";
 
+    //=================OTHER STRING====================
+    public static final String TITLE_NAME = "title_name";
+
 }

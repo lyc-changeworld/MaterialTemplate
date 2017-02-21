@@ -22,28 +22,33 @@ public abstract class BaseRyAdapter extends RecyclerView.Adapter<BaseRyAdapter.V
 
     private LayoutInflater mInflater;//创建布局装载对象来获取相关控件（类似于findViewById()）
     private Context mContext;//显示框面
-    private List<MyBean> mList;
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+    protected List<MyBean> mList;
 
-    //设置接口方法,具体功能让子类来实现
-    protected abstract int getLayout();
-    protected abstract void bindData(ViewHolder holder,int postion);
 
+    //定义两个接口引用变量
+    private OnClickListener mOnClickListener;
+    private OnLongClickListener mOnLongClickListener;
 
     //define interface
-    public  interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view,int postion);
-        void onItemLongClick(View view,int postion);
+    public interface OnClickListener {
+        void onClick(View view,int postion);
     }
-    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-        this.mOnItemClickListener = listener;
+    public interface OnLongClickListener{
+        void onLongClick(View view,int postion);
+    }
+    //定义 set方法
+    public void setOnClickListener(OnClickListener onClickListener) {
+        mOnClickListener = onClickListener;
+    }
+    public void setOnLongClickListener(OnLongClickListener onLongClickListener) {
+        mOnLongClickListener = onLongClickListener;
     }
 
 
     /*构造方法*/
-    public BaseRyAdapter(Context mContext, List<MyBean> mList) {
+    public BaseRyAdapter(Context mContext,List<MyBean> myBeanList) {
         this.mContext = mContext;
-        this.mList = mList;
+        this.mList=myBeanList;
         //通过获取context来初始化mInflater对象
         mInflater = LayoutInflater.from(mContext);
     }
@@ -57,7 +62,7 @@ public abstract class BaseRyAdapter extends RecyclerView.Adapter<BaseRyAdapter.V
     //先创建ViewHolder
     public ViewHolder onCreateViewHolder(ViewGroup parent, int type) {
         //下面需要把单个item对应的布局文件加载进来,这里对应R.layout.item_my布局文件
-        View view = mInflater.inflate(getLayout(), parent, false);
+        View view = mInflater.inflate(R.layout.item_no_card, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);//创建一个item的viewHoler实例
         return viewHolder;
     }
@@ -76,25 +81,23 @@ public abstract class BaseRyAdapter extends RecyclerView.Adapter<BaseRyAdapter.V
         * */
         //holder.mTvAchuan.setText(myBean.getAchuan());
 
-        //
-        bindData(holder,postion);
 
         /***为item设置点击监听事件***/
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mOnItemClickListener!=null){
-                    //设置单击回调监听
-                    mOnItemClickListener.onItemClick(view,postion);
+                if (mOnClickListener != null) {
+                    //设置回调监听
+                    mOnClickListener.onClick(view,postion);
                 }
             }
         });
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if(mOnItemClickListener!=null){
+                if(mOnLongClickListener!=null){
                     //设置长时间点击回调监听
-                    mOnItemClickListener.onItemLongClick(v,postion);
+                    mOnLongClickListener.onLongClick(v,postion);
                 }
                 return false;//设置成false,这样就不会触发单击的监听事件
             }

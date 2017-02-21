@@ -15,9 +15,9 @@ import com.example.achuan.materialtemplate.R;
 import com.example.achuan.materialtemplate.app.Constants;
 import com.example.achuan.materialtemplate.base.SimpleActivity;
 import com.example.achuan.materialtemplate.ui.main.fragment.SettingsFragment;
-import com.example.achuan.materialtemplate.ui.module0.fragment.Module_0MainFragment;
-import com.example.achuan.materialtemplate.ui.module1.fragment.Module_1MainFragment;
-import com.example.achuan.materialtemplate.ui.module2.fragment.Module_2MainFragment;
+import com.example.achuan.materialtemplate.ui.module0.fragment.Module0MainFragment;
+import com.example.achuan.materialtemplate.ui.module1.fragment.Module1MainFragment;
+import com.example.achuan.materialtemplate.ui.module2.fragment.Module2MainFragment;
 import com.example.achuan.materialtemplate.util.SharedPreferenceUtil;
 import com.example.achuan.materialtemplate.util.SystemUtil;
 
@@ -29,10 +29,11 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
     //左侧部分打开按钮
     ActionBarDrawerToggle mDrawerToggle;
     //需要装载到主活动中的Fragment的引用变量
-    Module_0MainFragment mModuleFragment_0;
-    Module_1MainFragment mModuleFragment_1;
-    Module_2MainFragment mModuleFragment_2;
+    Module0MainFragment mModule0MainFragment;
+    Module1MainFragment mModule1MainFragment;
+    Module2MainFragment mModule2MainFragment;
     SettingsFragment mSettingsFragment;
+
 
     //定义变量记录需要隐藏和显示的fragment的编号
     private int hideFragment = Constants.TYPE_MODULE_0;
@@ -40,7 +41,6 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
 
     //记录左侧navigation的item点击
     MenuItem mLastMenuItem;//历史
-
     int contentViewId;//内容显示区域的控件的id号,后面用来添加碎片使用
 
 
@@ -48,28 +48,28 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
     Toolbar mToolbar;
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
-    @BindView(R.id.nav_view)
-    NavigationView mNavView;
-
+    @BindView(R.id.drawer_nav)
+    NavigationView mDrawerNav;
 
     @Override
     protected int getLayout() {
         return R.layout.activity_main;
     }
+
     @Override
     protected void initEventAndData() {
-        contentViewId=R.id.fl_main_content;
+        contentViewId = R.id.fl_main_content;
         /********************检测并打开网络****************/
         SystemUtil.checkAndShowNetSettingDialog(this);
         /***1-初始化创建模块的fragment实例对象,并装载到主activity中****/
-        mModuleFragment_0=new Module_0MainFragment();
+        mModule0MainFragment = new Module0MainFragment();
         //***初始化显示第一个Fragment,用replace方法***
-        replaceFragment(R.id.fl_main_content,mModuleFragment_0);
+        replaceFragment(R.id.fl_main_content, mModule0MainFragment);
         /***2-navigation中item的初始化设置***/
         //初始化第一次显示的item为设置界面
-        mLastMenuItem = mNavView.getMenu().findItem(R.id.drawer_nav_fun_0);
+        mLastMenuItem = mDrawerNav.getMenu().findItem(R.id.drawer_nav_fun_0);
         mLastMenuItem.setChecked(true);
-        mNavView.setNavigationItemSelectedListener(this);
+        mDrawerNav.setNavigationItemSelectedListener(this);
         SharedPreferenceUtil.setCurrentItem(showFragment);
         //初始化toolbar
         setToolBar(mToolbar, (String) mLastMenuItem.getTitle());
@@ -85,13 +85,14 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
         //将DrawerToggle中的drawer图标,设置为ActionBar中的Home-Button的Icon
         mDrawerToggle.syncState();
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
         /***当系统版本小于5.0时,避免NavView不延伸到状态栏,需进行如下设置***/
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             //将侧边栏顶部延伸至status bar
             mDrawerLayout.setFitsSystemWindows(true);
             //将主页面顶部延伸至status bar;虽默认为false,但经测试,DrawerLayout需显示设置
@@ -118,6 +119,7 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
         }
         return true;
     }
+
     /***
      * navigation的item点击事件监听方法实现
      ***/
@@ -127,44 +129,45 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
             //针对不同的item实现不同的逻辑处理
             case R.id.drawer_nav_fun_0:
                 showFragment = Constants.TYPE_MODULE_0;
-                if(mModuleFragment_0==null){
-                    mModuleFragment_0=new Module_0MainFragment();
+                if (mModule0MainFragment == null) {
+                    mModule0MainFragment = new Module0MainFragment();
                     //第一次创建Fragment时将碎片添加到内容布局中
-                    addFragment(contentViewId,mModuleFragment_0);
+                    addFragment(contentViewId, mModule0MainFragment);
                 }
                 break;
             case R.id.drawer_nav_fun_1:
                 showFragment = Constants.TYPE_MODULE_1;
-                if(mModuleFragment_1==null){
-                    mModuleFragment_1=new Module_1MainFragment();
-                    addFragment(contentViewId,mModuleFragment_1);
+                if (mModule1MainFragment == null) {
+                    mModule1MainFragment = new Module1MainFragment();
+                    addFragment(contentViewId, mModule1MainFragment);
                 }
                 break;
             case R.id.drawer_nav_fun_2:
                 showFragment = Constants.TYPE_MODULE_2;
-                if(mModuleFragment_2==null){
-                    mModuleFragment_2=new Module_2MainFragment();
-                    addFragment(contentViewId,mModuleFragment_2);
+                if (mModule2MainFragment == null) {
+                    mModule2MainFragment = new Module2MainFragment();
+                    addFragment(contentViewId, mModule2MainFragment);
                 }
                 break;
             case R.id.drawer_nav_opt_2:
-                showFragment=Constants.TYPE_SETTINGS;
-                if(mSettingsFragment==null){
-                    mSettingsFragment=new SettingsFragment();
-                    addFragment(contentViewId,mSettingsFragment);
+                showFragment = Constants.TYPE_SETTINGS;
+                if (mSettingsFragment == null) {
+                    mSettingsFragment = new SettingsFragment();
+                    addFragment(contentViewId, mSettingsFragment);
                 }
                 break;
-            default:break;
+            default:
+                break;
         }
         /***点击item后进行显示切换处理,并记录在本地中***/
-        if (mLastMenuItem!=null&&mLastMenuItem!= item) {
+        if (mLastMenuItem != null && mLastMenuItem != item) {
             mLastMenuItem.setChecked(false);//取消历史选择
             item.setChecked(true);//设置当前item选择
             mToolbar.setTitle(item.getTitle());//改变标题栏的内容
             //记录当前显示的item
             SharedPreferenceUtil.setCurrentItem(showFragment);
             //***实现fragment的切换显示***
-            showFragment(getTargetFragment(hideFragment),getTargetFragment(showFragment));
+            showFragment(getTargetFragment(hideFragment), getTargetFragment(showFragment));
             //选择过的item变成了历史
             mLastMenuItem = item;
             //当前fragment显示完就成为历史了
@@ -179,16 +182,17 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
     private Fragment getTargetFragment(int item) {
         switch (item) {
             case Constants.TYPE_MODULE_0:
-                return mModuleFragment_0;
+                return mModule0MainFragment;
             case Constants.TYPE_MODULE_1:
-                return mModuleFragment_1;
+                return mModule1MainFragment;
             case Constants.TYPE_MODULE_2:
-                return mModuleFragment_2;
+                return mModule2MainFragment;
             case Constants.TYPE_SETTINGS:
                 return mSettingsFragment;
-            default:break;
+            default:
+                break;
         }
-        return mModuleFragment_0;
+        return mModule0MainFragment;
     }
 
 }

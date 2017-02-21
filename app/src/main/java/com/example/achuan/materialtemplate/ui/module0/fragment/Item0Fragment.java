@@ -15,9 +15,10 @@ import com.example.achuan.materialtemplate.BaseDetailActivity;
 import com.example.achuan.materialtemplate.R;
 import com.example.achuan.materialtemplate.RyItemDivider;
 import com.example.achuan.materialtemplate.RyItemTouchHelperCallback;
+import com.example.achuan.materialtemplate.app.Constants;
 import com.example.achuan.materialtemplate.base.SimpleFragment;
 import com.example.achuan.materialtemplate.model.bean.MyBean;
-import com.example.achuan.materialtemplate.ui.module0.adapter.Module0_RyAdapter;
+import com.example.achuan.materialtemplate.ui.module0.adapter.Item0Adapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,41 +32,41 @@ import butterknife.ButterKnife;
  * 功能：该界面使用的是非Card子项的列表,因此使用了自定义的分割线
  */
 
-public class Item_0Fragment extends SimpleFragment {
+public class Item0Fragment extends SimpleFragment {
 
-
-    @BindView(R.id.ry_view)
-    RecyclerView mRyView;
-    @BindView(R.id.swipe_refresh)
-    SwipeRefreshLayout mSwipeRefresh;
 
     Context mContent;
-    List<MyBean> mList;
-    Module0_RyAdapter mAdatper;
+    List<MyBean> mMyBeanList;
+    Item0Adapter mItem0Adapter;
+    boolean isPositive = true;//列表是否正序显示
 
-    boolean isPositive=true;//列表是否正序显示
+    @BindView(R.id.rv)
+    RecyclerView mRv;
+    @BindView(R.id.sw_rf)
+    SwipeRefreshLayout mSwRf;
+
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_0_item0;
+        return R.layout.fragment_moudle0_item0;
     }
 
     @Override
     protected void initEventAndData() {
-        mContent=getActivity();
-        mList=new ArrayList<MyBean>();
+        mContent = getActivity();
+        mMyBeanList = new ArrayList<MyBean>();
         initData();
-        mAdatper=new Module0_RyAdapter(mContent,mList);
-        LinearLayoutManager linearlayoutManager=new LinearLayoutManager(mContent);
+        mItem0Adapter = new Item0Adapter(mContent, mMyBeanList);
+        LinearLayoutManager linearlayoutManager = new LinearLayoutManager(mContent);
         //设置方向(默认是垂直,下面的是水平设置)
         //linearlayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        mRyView.setLayoutManager(linearlayoutManager);//为列表添加布局
-        mRyView.setAdapter(mAdatper);//为列表添加适配器
+        mRv.setLayoutManager(linearlayoutManager);//为列表添加布局
+        mRv.setAdapter(mItem0Adapter);//为列表添加适配器
         //添加自定义的分割线
-        mRyView.addItemDecoration(new RyItemDivider(mContent,R.drawable.item_divider));
+        mRv.addItemDecoration(new RyItemDivider(mContent, R.drawable.di_item));
         /*添加刷新控件的下拉刷新事件监听接口*/
-        mSwipeRefresh.setColorSchemeResources(R.color.colorAccent);//刷新条的颜色
-        mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mSwRf.setColorSchemeResources(R.color.colorAccent);//刷新条的颜色
+        mSwRf.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 refrehData();
@@ -73,24 +74,25 @@ public class Item_0Fragment extends SimpleFragment {
         });
         /***------------------实现item的拖拽和滑动----------------***/
         //先创建回复对象
-        RyItemTouchHelperCallback ryItemTouchHelperCallback=new RyItemTouchHelperCallback();
+        RyItemTouchHelperCallback ryItemTouchHelperCallback = new RyItemTouchHelperCallback();
         //添加监听事件,并实现接口回调中的方法
         ryItemTouchHelperCallback.setOnItemTouchCallbackListener(new RyItemTouchHelperCallback.OnItemTouchCallbackListener() {
             @Override
             public void onSwiped(int adapterPosition) {
                 // 滑动删除的时候，从数据源移除，并刷新这个Item。
-                if (mList != null) {
-                    mList.remove(adapterPosition);
-                    mAdatper.notifyItemRemoved(adapterPosition);
+                if (mMyBeanList != null) {
+                    mMyBeanList.remove(adapterPosition);
+                    mItem0Adapter.notifyItemRemoved(adapterPosition);
                 }
             }
+
             @Override
             public boolean onMove(int srcPosition, int targetPosition) {
-                if (mList != null) {
+                if (mMyBeanList != null) {
                     // 更换数据源中的数据Item的位置
-                    Collections.swap(mList, srcPosition, targetPosition);
+                    Collections.swap(mMyBeanList, srcPosition, targetPosition);
                     // 更新UI中的Item的位置,主要是给用户看到交互效果
-                    mAdatper.notifyItemMoved(srcPosition, targetPosition);
+                    mItem0Adapter.notifyItemMoved(srcPosition, targetPosition);
                     return true;
                 }
                 return false;
@@ -99,21 +101,17 @@ public class Item_0Fragment extends SimpleFragment {
         ryItemTouchHelperCallback.setDragEnable(true);//设置是否拖拽
         ryItemTouchHelperCallback.setSwipeEnable(true);//设置是否可以滑动
         //将回复对象交给总触碰对象,并绑定事件到控件中
-        new ItemTouchHelper(ryItemTouchHelperCallback).attachToRecyclerView(mRyView);
+        new ItemTouchHelper(ryItemTouchHelperCallback).attachToRecyclerView(mRv);
 
         /*添加item的点击事件监听*/
-        mAdatper.setOnItemClickListener(new Module0_RyAdapter.OnRecyclerViewItemClickListener() {
+        mItem0Adapter.setOnClickListener(new Item0Adapter.OnClickListener() {
             @Override
-            public void onItemClick(View view, int postion) {
-                Intent intent=new Intent(mContent, BaseDetailActivity.class);
+            public void onClick(View view, int postion) {
+                Intent intent = new Intent(mContent, BaseDetailActivity.class);
                 /*传递消息*/
-                intent.putExtra(BaseDetailActivity.TITLE_NAME,
-                        mList.get(postion).getTitle());//传递点击item的标题
+                intent.putExtra(Constants.TITLE_NAME,
+                        mMyBeanList.get(postion).getTitle());//传递点击item的标题
                 mContent.startActivity(intent);//开始跳转activity
-            }
-            @Override
-            public void onItemLongClick(View view, int postion) {
-
             }
         });
     }
@@ -133,26 +131,27 @@ public class Item_0Fragment extends SimpleFragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        isPositive=!isPositive;//反序设置
+                        isPositive = !isPositive;//反序设置
                         initData();//重新初始化数据集合
-                        mAdatper.notifyDataSetChanged();//刷新列表显示
-                        mSwipeRefresh.setRefreshing(false);//隐藏刷新进度条
+                        mItem0Adapter.notifyDataSetChanged();//刷新列表显示
+                        mSwRf.setRefreshing(false);//隐藏刷新进度条
                     }
                 });
             }
         }).start();
 
     }
+
     //模拟数据抓取初始化
     private void initData() {
-        mList.clear();//清空数据集合
-        if(isPositive){
-            for (int i = 0; i <20 ; i++) {
-                mList.add(new MyBean("这里是标题"+i,"这里是内容区域"));
+        mMyBeanList.clear();//清空数据集合
+        if (isPositive) {
+            for (int i = 0; i < 20; i++) {
+                mMyBeanList.add(new MyBean("这里是标题" + i, "这里是内容区域"));
             }
-        }else {
-            for (int i = 19; i >=0 ; i--) {
-                mList.add(new MyBean("这里是标题"+i,"这里是内容区域"));
+        } else {
+            for (int i = 19; i >= 0; i--) {
+                mMyBeanList.add(new MyBean("这里是标题" + i, "这里是内容区域"));
             }
         }
     }

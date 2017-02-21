@@ -1,4 +1,4 @@
-package com.example.achuan.materialtemplate.ui.module0.adapter;
+package com.example.achuan.materialtemplate.ui.module1.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +22,8 @@ import butterknife.ButterKnife;
  * MyBean是一个(模板)数据模型类,路径为：model/bean/
  * 注意：该文件具体使用时需移动到对应ui/modulexxx/adapter文件目录下,方便管理
  */
-public class Module0_RyAdapter extends RecyclerView.Adapter<Module0_RyAdapter.ViewHolder> {
+public class Tab0Adapter extends RecyclerView.Adapter<Tab0Adapter.ViewHolder> {
+
 
 
     private LayoutInflater mInflater;//创建布局装载对象来获取相关控件（类似于findViewById()）
@@ -32,8 +33,7 @@ public class Module0_RyAdapter extends RecyclerView.Adapter<Module0_RyAdapter.Vi
 
     //define interface
     public interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view,int postion);
-        void onItemLongClick(View view,int postion);
+        void onItemClick(View view);
     }
 
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
@@ -41,7 +41,7 @@ public class Module0_RyAdapter extends RecyclerView.Adapter<Module0_RyAdapter.Vi
     }
 
     /*构造方法*/
-    public Module0_RyAdapter(Context mContext, List<MyBean> mList) {
+    public Tab0Adapter(Context mContext, List<MyBean> mList) {
         this.mContext = mContext;
         this.mList = mList;
         //通过获取context来初始化mInflater对象
@@ -59,7 +59,7 @@ public class Module0_RyAdapter extends RecyclerView.Adapter<Module0_RyAdapter.Vi
     //先创建ViewHolder
     public ViewHolder onCreateViewHolder(ViewGroup parent, int type) {
         //下面需要把单个item对应的布局文件加载进来,这里对应R.layout.item_my布局文件
-        View view = mInflater.inflate(R.layout.item_no_card, parent, false);
+        View view = mInflater.inflate(R.layout.item_card, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);//创建一个item的viewHoler实例
         return viewHolder;
     }
@@ -78,7 +78,7 @@ public class Module0_RyAdapter extends RecyclerView.Adapter<Module0_RyAdapter.Vi
         * 这一步比较重要,需要小心设置
         * */
         //holder.mTvAchuan.setText(myBean.getAchuan());
-        holder.mIvWechatItemImage.setBackgroundResource(R.mipmap.ic_launcher);
+        holder.mSquareImgView.setBackgroundResource(R.mipmap.ic_launcher);
         holder.mTvTitle.setText(myBean.getTitle());
         holder.mTvContent.setText(myBean.getContent());
         /***为item设置点击监听事件***/
@@ -87,18 +87,8 @@ public class Module0_RyAdapter extends RecyclerView.Adapter<Module0_RyAdapter.Vi
             public void onClick(View view) {
                 if (mOnItemClickListener != null) {
                     //设置回调监听
-                    mOnItemClickListener.onItemClick(view,postion);
+                    mOnItemClickListener.onItemClick(view);
                 }
-            }
-        });
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if(mOnItemClickListener!=null){
-                    //设置长时间点击回调监听
-                    mOnItemClickListener.onItemLongClick(v,postion);
-                }
-                return false;//设置成false,这样就不会触发单击的监听事件
             }
         });
     }
@@ -107,12 +97,13 @@ public class Module0_RyAdapter extends RecyclerView.Adapter<Module0_RyAdapter.Vi
     /*创建自定义的ViewHolder类*/
     public static class ViewHolder extends RecyclerView.ViewHolder {
         //使用butterknife来进行item中的控件加载,此处需要自己添加
-        @BindView(R.id.iv_wechat_item_image)
-        SquareImageView mIvWechatItemImage;
+        @BindView(R.id.square_imgView)
+        SquareImageView mSquareImgView;
         @BindView(R.id.tv_title)
         TextView mTvTitle;
         @BindView(R.id.tv_content)
         TextView mTvContent;
+
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

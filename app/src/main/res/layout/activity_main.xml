@@ -30,7 +30,7 @@
     <!--app:menu表示菜单栏布局文件-->
     <!--app:headerLayout表示顶部栏布局文件-->
     <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
+        android:id="@+id/drawer_nav"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"

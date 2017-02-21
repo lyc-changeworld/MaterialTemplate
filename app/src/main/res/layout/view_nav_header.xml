@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--该文件的功能:NavigationView的顶部布局文件-->
+<!--该文件的功能:NavigationView的顶部布局文件
+   这里使用的CircleImageView是用的开源库,需要到gradle文件中配置
+   compile 'de.hdodenhof:circleimageview:2.1.0'//开源的图片圆形化库
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
@@ -7,14 +10,14 @@
                 android:background="@color/cadetblue">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/icon_image"
+        android:id="@+id/circle_iv"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_centerInParent="true"
         android:src="@drawable/ic_settings_black_24dp" />
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -23,10 +26,10 @@
         android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/mail"
+        android:id="@+id/tv_mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/username"
+        android:layout_above="@id/tv_username"
         android:text="achuan9301@gmail.com"
         android:textColor="#FFF"
         android:textSize="14sp" />

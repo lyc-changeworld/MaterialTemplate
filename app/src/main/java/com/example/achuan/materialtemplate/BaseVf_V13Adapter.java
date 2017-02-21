@@ -19,25 +19,25 @@ import java.util.List;
 
 public class BaseVf_V13Adapter extends FragmentPagerAdapter {
 
-    private List<Fragment> mFragments;
+    private List<Fragment> mFragmentList;
     private List<String> mTitles;
 
 
-    public BaseVf_V13Adapter(FragmentManager fm,List<Fragment> mFragments,List<String> mTitles) {
+    public BaseVf_V13Adapter(FragmentManager fm,List<Fragment> mFragmentList,List<String> mTitles) {
         super(fm);
-        this.mFragments=mFragments;
+        this.mFragmentList=mFragmentList;
         this.mTitles=mTitles;
     }
 
     //获取Fragment对象
     @Override
     public Fragment getItem(int position) {
-        return mFragments.get(position);
+        return mFragmentList.get(position);
     }
     //获取总个数
     @Override
     public int getCount() {
-        return mFragments.size();
+        return mFragmentList.size();
     }
     //获取当前导航滑动到的位置的方法
     @Override

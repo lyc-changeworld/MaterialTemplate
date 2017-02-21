@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--功能：实现一个渐变的颜色效果-->
+<!--功能：实现一个渐变的颜色效果,从底部开始往上延伸-->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <!--android:angle="xx"90代表由下往上,180代表由右往左(以此类推)-->
     <gradient

@@ -1,4 +1,4 @@
-package com.example.achuan.materialtemplate.ui.module1.adapter;
+package com.example.achuan.materialtemplate.ui.module0.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -22,25 +22,38 @@ import butterknife.ButterKnife;
  * MyBean是一个(模板)数据模型类,路径为：model/bean/
  * 注意：该文件具体使用时需移动到对应ui/modulexxx/adapter文件目录下,方便管理
  */
-public class Module1_RyAdapter extends RecyclerView.Adapter<Module1_RyAdapter.ViewHolder> {
+public class Item0Adapter extends RecyclerView.Adapter<Item0Adapter.ViewHolder> {
 
 
+    @BindView(R.id.square_imgView)
+    SquareImageView mSquareImgView;
     private LayoutInflater mInflater;//创建布局装载对象来获取相关控件（类似于findViewById()）
     private Context mContext;//显示框面
     private List<MyBean> mList;
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+    //定义两个接口引用变量
+    private OnClickListener mOnClickListener;
+    private OnLongClickListener mOnLongClickListener;
 
     //define interface
-    public interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view);
+    public interface OnClickListener {
+        void onClick(View view, int postion);
     }
 
-    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-        this.mOnItemClickListener = listener;
+    public interface OnLongClickListener {
+        void onLongClick(View view, int postion);
+    }
+
+    //定义 set方法
+    public void setOnClickListener(OnClickListener onClickListener) {
+        mOnClickListener = onClickListener;
+    }
+
+    public void setOnLongClickListener(OnLongClickListener onLongClickListener) {
+        mOnLongClickListener = onLongClickListener;
     }
 
     /*构造方法*/
-    public Module1_RyAdapter(Context mContext, List<MyBean> mList) {
+    public Item0Adapter(Context mContext, List<MyBean> mList) {
         this.mContext = mContext;
         this.mList = mList;
         //通过获取context来初始化mInflater对象
@@ -58,7 +71,7 @@ public class Module1_RyAdapter extends RecyclerView.Adapter<Module1_RyAdapter.Vi
     //先创建ViewHolder
     public ViewHolder onCreateViewHolder(ViewGroup parent, int type) {
         //下面需要把单个item对应的布局文件加载进来,这里对应R.layout.item_my布局文件
-        View view = mInflater.inflate(R.layout.item_card, parent, false);
+        View view = mInflater.inflate(R.layout.item_no_card, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);//创建一个item的viewHoler实例
         return viewHolder;
     }
@@ -76,18 +89,27 @@ public class Module1_RyAdapter extends RecyclerView.Adapter<Module1_RyAdapter.Vi
         * 这里结合下面自定义的viewHolder类,拿到控件的加载对象然后进行数据绑定
         * 这一步比较重要,需要小心设置
         * */
-        //holder.mTvAchuan.setText(myBean.getAchuan());
-        holder.mIvWechatItemImage.setBackgroundResource(R.mipmap.ic_launcher);
+        holder.mSquareImgView.setBackgroundResource(R.mipmap.ic_launcher);
         holder.mTvTitle.setText(myBean.getTitle());
         holder.mTvContent.setText(myBean.getContent());
         /***为item设置点击监听事件***/
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mOnItemClickListener != null) {
+                if (mOnClickListener != null) {
                     //设置回调监听
-                    mOnItemClickListener.onItemClick(view);
+                    mOnClickListener.onClick(view, postion);
                 }
+            }
+        });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mOnLongClickListener != null) {
+                    //设置长时间点击回调监听
+                    mOnLongClickListener.onLongClick(v, postion);
+                }
+                return false;//设置成false,这样就不会触发单击的监听事件
             }
         });
     }
@@ -96,12 +118,13 @@ public class Module1_RyAdapter extends RecyclerView.Adapter<Module1_RyAdapter.Vi
     /*创建自定义的ViewHolder类*/
     public static class ViewHolder extends RecyclerView.ViewHolder {
         //使用butterknife来进行item中的控件加载,此处需要自己添加
-        @BindView(R.id.iv_wechat_item_image)
-        SquareImageView mIvWechatItemImage;
+        @BindView(R.id.square_imgView)
+        SquareImageView mSquareImgView;
         @BindView(R.id.tv_title)
         TextView mTvTitle;
         @BindView(R.id.tv_content)
         TextView mTvContent;
+
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
