@@ -24,7 +24,7 @@
         app:itemIconTint="@color/btm_nav_selector"
         app:itemTextColor="@color/btm_nav_selector"
         app:itemBackground="@color/white"
-        app:menu="@menu/menu_bottom_nav">
+        app:menu="@menu/menu_bottom_module0">
     </android.support.design.widget.BottomNavigationView>
 
 </LinearLayout>

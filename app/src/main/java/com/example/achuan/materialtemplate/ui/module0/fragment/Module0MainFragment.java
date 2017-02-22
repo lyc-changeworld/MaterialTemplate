@@ -52,7 +52,7 @@ public class Module0MainFragment extends SimpleFragment implements BottomNavigat
         contentViewId = R.id.fl_moudle0_content;
         /***1-初始化底部导航栏设置***/
         //初始化第一次显示的item为设置界面
-        mLastMenuItem = mBtmNav.getMenu().findItem(R.id.bottom_nav_0);
+        mLastMenuItem = mBtmNav.getMenu().findItem(R.id.bottom_0);
         mLastMenuItem.setChecked(true);
         //添加点击监听事件
         mBtmNav.setOnNavigationItemSelectedListener(this);
@@ -66,7 +66,7 @@ public class Module0MainFragment extends SimpleFragment implements BottomNavigat
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.bottom_nav_0:
+            case R.id.bottom_0:
                 showFragment = Constants.TYPE_ITEM_0;
                 //第一次加载显示时,才创建碎片对象,并添加到内容容器中
                 if (mItem0Fragment == null) {
@@ -74,14 +74,14 @@ public class Module0MainFragment extends SimpleFragment implements BottomNavigat
                     addFragment(contentViewId, mItem0Fragment);
                 }
                 break;
-            case R.id.bottom_nav_1:
+            case R.id.bottom_1:
                 showFragment = Constants.TYPE_ITEM_1;
                 if (mItem1Fragment == null) {
                     mItem1Fragment = new Item1Fragment();
                     addFragment(contentViewId, mItem1Fragment);
                 }
                 break;
-            case R.id.bottom_nav_2:
+            case R.id.bottom_2:
                 showFragment = Constants.TYPE_ITEM_2;
                 if (mItem2Fragment == null) {
                     mItem2Fragment = new Item2Fragment();

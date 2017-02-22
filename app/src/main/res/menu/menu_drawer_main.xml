@@ -4,47 +4,47 @@
     <!--checkableBehavior:指定为single表示所有菜单只能单选
         group表示一个组-->
     <!--功能-->
-    <item android:title="@string/drawer_nav_group_function">
+    <item android:title="@string/drawer_group_function">
         <menu>
             <item
-                android:id="@+id/drawer_nav_fun_0"
+                android:id="@+id/drawer_fun_0"
                 android:icon="@drawable/ic_settings_black_24dp"
-                android:title="@string/drawer_nav_title_0"
+                android:title="@string/drawer_title_0"
                 android:checkable="true">
             </item>
             <item
-                android:id="@+id/drawer_nav_fun_1"
+                android:id="@+id/drawer_fun_1"
                 android:icon="@drawable/ic_settings_black_24dp"
-                android:title="@string/drawer_nav_title_1"
+                android:title="@string/drawer_title_1"
                 android:checkable="true">
             </item>
             <item
-                android:id="@+id/drawer_nav_fun_2"
+                android:id="@+id/drawer_fun_2"
                 android:icon="@drawable/ic_settings_black_24dp"
-                android:title="@string/drawer_nav_title_2"
+                android:title="@string/drawer_title_2"
                 android:checkable="true">
             </item>
         </menu>
     </item>
     <!--选项-->
-    <item android:title="@string/drawer_nav_group_options">
+    <item android:title="@string/drawer_group_options">
         <menu>
             <item
-                android:id="@+id/drawer_nav_opt_0"
+                android:id="@+id/drawer_opt_0"
                 android:icon="@drawable/ic_settings_black_24dp"
-                android:title="@string/drawer_nav_title_3"
+                android:title="@string/drawer_title_3"
                 android:checkable="true">
             </item>
             <item
-                android:id="@+id/drawer_nav_opt_1"
+                android:id="@+id/drawer_opt_1"
                 android:icon="@drawable/ic_settings_black_24dp"
-                android:title="@string/drawer_nav_title_4"
+                android:title="@string/drawer_title_4"
                 android:checkable="true">
             </item>
             <item
-                android:id="@+id/drawer_nav_opt_2"
+                android:id="@+id/drawer_opt_2"
                 android:icon="@drawable/ic_settings_black_24dp"
-                android:title="@string/drawer_nav_title_5"
+                android:title="@string/drawer_title_5"
                 android:checkable="true">
             </item>
         </menu>

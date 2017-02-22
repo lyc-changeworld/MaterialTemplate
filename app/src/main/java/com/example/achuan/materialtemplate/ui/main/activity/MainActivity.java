@@ -67,7 +67,7 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
         replaceFragment(R.id.fl_main_content, mModule0MainFragment);
         /***2-navigation中item的初始化设置***/
         //初始化第一次显示的item为设置界面
-        mLastMenuItem = mDrawerNav.getMenu().findItem(R.id.drawer_nav_fun_0);
+        mLastMenuItem = mDrawerNav.getMenu().findItem(R.id.drawer_fun_0);
         mLastMenuItem.setChecked(true);
         mDrawerNav.setNavigationItemSelectedListener(this);
         SharedPreferenceUtil.setCurrentItem(showFragment);
@@ -127,7 +127,7 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             //针对不同的item实现不同的逻辑处理
-            case R.id.drawer_nav_fun_0:
+            case R.id.drawer_fun_0:
                 showFragment = Constants.TYPE_MODULE_0;
                 if (mModule0MainFragment == null) {
                     mModule0MainFragment = new Module0MainFragment();
@@ -135,21 +135,21 @@ public class MainActivity extends SimpleActivity implements NavigationView.OnNav
                     addFragment(contentViewId, mModule0MainFragment);
                 }
                 break;
-            case R.id.drawer_nav_fun_1:
+            case R.id.drawer_fun_1:
                 showFragment = Constants.TYPE_MODULE_1;
                 if (mModule1MainFragment == null) {
                     mModule1MainFragment = new Module1MainFragment();
                     addFragment(contentViewId, mModule1MainFragment);
                 }
                 break;
-            case R.id.drawer_nav_fun_2:
+            case R.id.drawer_fun_2:
                 showFragment = Constants.TYPE_MODULE_2;
                 if (mModule2MainFragment == null) {
                     mModule2MainFragment = new Module2MainFragment();
                     addFragment(contentViewId, mModule2MainFragment);
                 }
                 break;
-            case R.id.drawer_nav_opt_2:
+            case R.id.drawer_opt_2:
                 showFragment = Constants.TYPE_SETTINGS;
                 if (mSettingsFragment == null) {
                     mSettingsFragment = new SettingsFragment();
