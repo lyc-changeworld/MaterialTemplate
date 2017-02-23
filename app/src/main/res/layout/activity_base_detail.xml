@@ -58,7 +58,7 @@
     <!--下面的是内容详情部分的布局-->
     <!--NestedScrollView的内部只允许存在一个直接子布局-->
     <android.support.v4.widget.NestedScrollView
-        android:id="@+id/scroll_view"
+        android:id="@+id/nst_sclVi"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"

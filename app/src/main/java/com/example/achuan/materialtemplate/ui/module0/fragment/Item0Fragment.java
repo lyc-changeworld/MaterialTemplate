@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 
 import com.example.achuan.materialtemplate.BaseDetailActivity;
 import com.example.achuan.materialtemplate.R;
-import com.example.achuan.materialtemplate.RyItemDivider;
-import com.example.achuan.materialtemplate.RyItemTouchHelperCallback;
+import com.example.achuan.materialtemplate.widget.RyItemDivider;
+import com.example.achuan.materialtemplate.widget.RyItemTouchHelperCallback;
 import com.example.achuan.materialtemplate.app.Constants;
 import com.example.achuan.materialtemplate.base.SimpleFragment;
 import com.example.achuan.materialtemplate.model.bean.MyBean;

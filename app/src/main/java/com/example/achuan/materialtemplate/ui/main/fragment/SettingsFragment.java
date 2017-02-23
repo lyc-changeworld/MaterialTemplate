@@ -31,7 +31,7 @@ public  class SettingsFragment extends PreferenceFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.fragment_settings);//加载xml
+        addPreferencesFromResource(R.xml.preference_settings);//加载xml
 
         //先拿到全部设置文件的管理者,后续可根据key值来获取设置的值
         mPreferenceManager=getPreferenceManager();

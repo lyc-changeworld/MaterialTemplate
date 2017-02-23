@@ -1,4 +1,4 @@
-package com.example.achuan.materialtemplate;
+package com.example.achuan.materialtemplate.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;

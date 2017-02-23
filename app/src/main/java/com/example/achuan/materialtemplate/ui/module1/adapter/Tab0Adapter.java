@@ -25,7 +25,8 @@ import butterknife.ButterKnife;
 public class Tab0Adapter extends RecyclerView.Adapter<Tab0Adapter.ViewHolder> {
 
 
-
+    @BindView(R.id.square_iv)
+    SquareImageView mSquareIv;
     private LayoutInflater mInflater;//创建布局装载对象来获取相关控件（类似于findViewById()）
     private Context mContext;//显示框面
     private List<MyBean> mList;
@@ -78,7 +79,7 @@ public class Tab0Adapter extends RecyclerView.Adapter<Tab0Adapter.ViewHolder> {
         * 这一步比较重要,需要小心设置
         * */
         //holder.mTvAchuan.setText(myBean.getAchuan());
-        holder.mSquareImgView.setBackgroundResource(R.mipmap.ic_launcher);
+        holder.mSquareIv.setBackgroundResource(R.mipmap.ic_launcher);
         holder.mTvTitle.setText(myBean.getTitle());
         holder.mTvContent.setText(myBean.getContent());
         /***为item设置点击监听事件***/
@@ -97,13 +98,12 @@ public class Tab0Adapter extends RecyclerView.Adapter<Tab0Adapter.ViewHolder> {
     /*创建自定义的ViewHolder类*/
     public static class ViewHolder extends RecyclerView.ViewHolder {
         //使用butterknife来进行item中的控件加载,此处需要自己添加
-        @BindView(R.id.square_imgView)
-        SquareImageView mSquareImgView;
+        @BindView(R.id.square_iv)
+        SquareImageView mSquareIv;
         @BindView(R.id.tv_title)
         TextView mTvTitle;
         @BindView(R.id.tv_content)
         TextView mTvContent;
-
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

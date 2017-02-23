@@ -21,7 +21,7 @@
             android:layout_height="70dp">
             <!--下面使用自定义的正方形view控件-->
             <com.example.achuan.materialtemplate.widget.SquareImageView
-                android:id="@+id/square_imgView"
+                android:id="@+id/square_iv"
                 android:scaleType="centerCrop"
                 android:transitionName="shareView"
                 android:layout_width="70dp"

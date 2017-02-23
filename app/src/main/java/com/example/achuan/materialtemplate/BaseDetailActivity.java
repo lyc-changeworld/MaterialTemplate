@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,7 +22,7 @@ import butterknife.ButterKnife;
  * Created by achuan on 17-2-18.
  * 功能：一个大概的详情内容展示页面
  * 注明：工具栏使用了折叠bar,折叠bar的背景图是用的Glide开源库加载的
- *      这只是个大概的框架,具体使用时布局自行改动
+ * 这只是个大概的框架,具体使用时布局自行改动
  * 未解决的bug：在Android 5.0以下的系统中,状态栏在折叠bar未压缩的情况下无法实现沉浸式的效果
  */
 
@@ -40,6 +41,8 @@ public class BaseDetailActivity extends SimpleActivity {
     TextView mTvDetailContent;
     @BindView(R.id.fab_detail)
     FloatingActionButton mFabDetail;
+    @BindView(R.id.nst_sclVi)
+    NestedScrollView mNstSclVi;
 
 
     @Override
